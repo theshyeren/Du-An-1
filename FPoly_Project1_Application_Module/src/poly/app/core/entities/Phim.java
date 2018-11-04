@@ -12,7 +12,7 @@ import java.util.Set;
 public class Phim  implements java.io.Serializable {
 
 
-     private Integer id;
+     private String id;
      private LoaiPhim loaiPhim;
      private String ten;
      private int thoiLuong;
@@ -50,11 +50,11 @@ public class Phim  implements java.io.Serializable {
        this.suatChieus = suatChieus;
     }
    
-    public Integer getId() {
+    public String getId() {
         return this.id;
     }
     
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
     public LoaiPhim getLoaiPhim() {

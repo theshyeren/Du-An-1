@@ -5,34 +5,47 @@
  */
 package poly.app.ui.dialogs;
 
+import poly.app.core.daoimpl.PhimDaoImpl;
 import poly.app.core.entities.Phim;
 
 /**
  *
  * @author vothanhtai
  */
-public class DialogThemPhim extends javax.swing.JDialog {
-    
+public class DialogCapNhatPhim extends javax.swing.JDialog {
+
+    Phim phim;
     /**
      * Creates new form DialogThemNhanVien
      */
-    public DialogThemPhim(java.awt.Frame parent, boolean modal) {
+    public DialogCapNhatPhim(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+    }
+    
+    public DialogCapNhatPhim(java.awt.Frame parent, boolean modal, String phimId) {
+        this(parent, modal);
+        
+        phim = new PhimDaoImpl().getById(phimId);
     }
     
     private void loadLoaiPhimToCombobox(){
         
     }
     
+    private void setModelToInput(){
+//        Do du lieu len input
+    }
+    
     private Phim getModelFromInput(){
 //        code lay phim tu input
+//        set lai gia tri moi cho phim
 
         return null;
     }
     
-    private boolean insertModelToDatabase(){
+    private boolean updateModelToDatabase(){
 //        goi ham getModelFromInput
         try {
 
@@ -263,7 +276,7 @@ public class DialogThemPhim extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        if (insertModelToDatabase()){
+        if (updateModelToDatabase()){
             
         }else{
             
@@ -287,14 +300,26 @@ public class DialogThemPhim extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DialogThemPhim.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogCapNhatPhim.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DialogThemPhim.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogCapNhatPhim.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DialogThemPhim.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogCapNhatPhim.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DialogThemPhim.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogCapNhatPhim.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -303,7 +328,7 @@ public class DialogThemPhim extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DialogThemPhim dialog = new DialogThemPhim(new javax.swing.JFrame(), true);
+                DialogCapNhatPhim dialog = new DialogCapNhatPhim(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
