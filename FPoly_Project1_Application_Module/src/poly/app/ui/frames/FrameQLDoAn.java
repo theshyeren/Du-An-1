@@ -21,6 +21,7 @@ import poly.app.core.entities.DoAn;
 import poly.app.core.entities.DoAnChiTiet;
 import poly.app.core.helper.DialogHelper;
 import poly.app.core.helper.TableStructureHelper;
+import poly.app.ui.dialogs.DialogThemDoAn;
 import poly.app.ui.utils.TableRendererUtil;
 
 /**
@@ -281,11 +282,11 @@ public class FrameQLDoAn extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCollapseMouseReleased
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        loadDataToTable();
+        this.loadDataToTable();
     }//GEN-LAST:event_formWindowOpened
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-
+        this.insertDA();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblDoAnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDoAnMouseClicked
@@ -317,24 +318,24 @@ public class FrameQLDoAn extends javax.swing.JFrame {
     public void loadDoAnChiTiet() {
         int index = tblDoAn.getSelectedRow();
         String id = (String) tblDoAn.getValueAt(index, 0);
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put(id, mapDoAn.get(id));
-        
         DefaultTableModel modelDACT = (DefaultTableModel) tblDoAnChiTiet.getModel();
         modelDACT.setRowCount(0);
-        
-        DoAnChiTietDaoImpl DACTDao = new DoAnChiTietDaoImpl();
-        List<DoAnChiTiet> listDACT = DACTDao.getByProperties(map);
-        for(DoAnChiTiet fill : listDACT)
+        DoAn doan = (DoAn)mapDoAn.get(id);
+        Set<DoAnChiTiet> dact = doan.getDoAnChiTiets();
+        for(DoAnChiTiet fill : dact)
         {
             Object[] record = new Object[]{
                 fill.getKichCoDoAn().getTen(),
                 fill.getDonGia(),
-                fill.isTrangThai()
+                fill.isTrangThai()?"Đang được bán":"Đã ngưng bán"
             };
             modelDACT.addRow(record);
         }
 
+    }
+    public void insertDA()
+    {
+        new DialogThemDoAn(this, true).setVisible(true);
     }
 
     /**
