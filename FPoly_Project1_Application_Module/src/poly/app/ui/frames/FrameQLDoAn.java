@@ -6,9 +6,13 @@
 package poly.app.ui.frames;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import poly.app.core.daoimpl.DoAnChiTietDaoImpl;
@@ -33,7 +37,6 @@ public class FrameQLDoAn extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         reRenderUI();
         this.loadDataToTable();
-        this.loadDoAnChiTiet();
     }
 
     private void reRenderUI() {
@@ -289,9 +292,10 @@ public class FrameQLDoAn extends javax.swing.JFrame {
         this.loadDoAnChiTiet();
     }//GEN-LAST:event_tblDoAnMouseClicked
     List<DoAn> listDoAn = new ArrayList<>();
-            
-            
-            
+    List<DoAnChiTiet> listDoAnCT = new ArrayList<>();
+    Map<String, Object> mapDoAn = new HashMap<String, Object>();
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void loadDataToTable() {
 //        Đổ dữ liệu từ database vào table
 //        Code không quá 10 dòng
@@ -306,19 +310,23 @@ public class FrameQLDoAn extends javax.swing.JFrame {
                 fill.getLoaiDoAn().getTen()
             };
             modelDA.addRow(record);
+            mapDoAn.put(fill.getId(), fill);
         }
     }
 
     public void loadDoAnChiTiet() {
         int index = tblDoAn.getSelectedRow();
-        DoAn doan = listDoAn.get(index);
-        String id = doan.getId();
+        String id = (String) tblDoAn.getValueAt(index, 0);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put(id, mapDoAn.get(id));
         
         DefaultTableModel modelDACT = (DefaultTableModel) tblDoAnChiTiet.getModel();
         modelDACT.setRowCount(0);
+        
         DoAnChiTietDaoImpl DACTDao = new DoAnChiTietDaoImpl();
-        List<DoAnChiTiet> listDoAnCT = DACTDao.getAll();
-        for (DoAnChiTiet fill : listDoAnCT) {
+        List<DoAnChiTiet> listDACT = DACTDao.getByProperties(map);
+        for(DoAnChiTiet fill : listDACT)
+        {
             Object[] record = new Object[]{
                 fill.getKichCoDoAn().getTen(),
                 fill.getDonGia(),
@@ -326,6 +334,7 @@ public class FrameQLDoAn extends javax.swing.JFrame {
             };
             modelDACT.addRow(record);
         }
+
     }
 
     /**
