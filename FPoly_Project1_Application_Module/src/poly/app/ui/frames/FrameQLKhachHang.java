@@ -5,8 +5,6 @@
  */
 package poly.app.ui.frames;
 
-import java.util.Vector;
-import poly.app.core.helper.TableStructureHelper;
 import poly.app.ui.utils.TableRendererUtil;
 
 /**
@@ -26,10 +24,9 @@ public class FrameQLKhachHang extends javax.swing.JFrame {
 
     private void reRenderUI() {
         //        Render lại giao diện cho table
-        TableRendererUtil tblRenderer1 = new TableRendererUtil(tblKhachHang);
-        tblRenderer1.setCellEditable(false);
-        tblRenderer1.setDataVector(new Vector(), TableStructureHelper.KHACHHANG_TABLE_IDENTIFIERS);
-        tblRenderer1.changeHeaderStyle();
+        TableRendererUtil tblRenderer = new TableRendererUtil(tblKhachHang);
+        tblRenderer.setCellEditable(false);
+        tblRenderer.changeHeaderStyle();
     }
 
     /**
@@ -62,7 +59,7 @@ public class FrameQLKhachHang extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel1.setText("Tra cứu nhân viên");
+        jLabel1.setText("Tra cứu khách hàng");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -127,7 +124,22 @@ public class FrameQLKhachHang extends javax.swing.JFrame {
             new String [] {
                 "Mã khách hàng", "Họ và tên", "Số cmnd", "Số điện thoại", "Email", "Địa chỉ", "Ngày đăng ký", "Ngày sinh", "Giới tính"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblKhachHang);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);

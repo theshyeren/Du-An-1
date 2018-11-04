@@ -79,6 +79,7 @@ DROP TABLE IF EXISTS `do_an_chi_tiet`;
 CREATE TABLE `do_an_chi_tiet` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `don_gia` int(10) unsigned NOT NULL,
+  `trang_thai` bit(1) NOT NULL,
   `do_an_id` varchar(15) NOT NULL,
   `kich_co_do_an_id` varchar(10) NOT NULL,
   PRIMARY KEY (`id`),
@@ -95,7 +96,7 @@ CREATE TABLE `do_an_chi_tiet` (
 
 LOCK TABLES `do_an_chi_tiet` WRITE;
 /*!40000 ALTER TABLE `do_an_chi_tiet` DISABLE KEYS */;
-INSERT INTO `do_an_chi_tiet` VALUES (1,20000,'DA001','S'),(2,30000,'DA001','M'),(3,40000,'DA001','L'),(4,89000,'DA002','S'),(5,139000,'DA002','M'),(6,169000,'DA002','L'),(7,10000,'NU003','S'),(8,15000,'NU003','M'),(9,25000,'NU003','L'),(10,10000,'NU004','S'),(11,15000,'NU004','M'),(12,25000,'NU004','L');
+INSERT INTO `do_an_chi_tiet` VALUES (1,20000,_binary '','DA001','S'),(2,30000,_binary '','DA001','M'),(3,40000,_binary '','DA001','L'),(4,89000,_binary '','DA002','S'),(5,139000,_binary '','DA002','M'),(6,169000,_binary '','DA002','L'),(7,10000,_binary '','NU003','S'),(8,15000,_binary '','NU003','M'),(9,25000,_binary '','NU003','L'),(10,10000,_binary '','NU004','S'),(11,15000,_binary '','NU004','M'),(12,25000,_binary '','NU004','L');
 /*!40000 ALTER TABLE `do_an_chi_tiet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +111,6 @@ CREATE TABLE `ghe_ngoi` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `vi_tri_day` varchar(1) NOT NULL,
   `vi_tri_cot` int(10) unsigned NOT NULL,
-  `trang_thai` varchar(20) NOT NULL DEFAULT 'chua_dat',
   `phong_chieu_id` int(10) unsigned NOT NULL,
   `loai_ghe_id` varchar(2) NOT NULL,
   PRIMARY KEY (`id`),
@@ -118,7 +118,7 @@ CREATE TABLE `ghe_ngoi` (
   KEY `FK_GHE_LOAIGHE_idx` (`loai_ghe_id`),
   CONSTRAINT `FK_GHE_LOAIGHE` FOREIGN KEY (`loai_ghe_id`) REFERENCES `loai_ghe` (`id`),
   CONSTRAINT `FK_GHE_PHONGCHIEU` FOREIGN KEY (`phong_chieu_id`) REFERENCES `phong_chieu` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,6 +127,7 @@ CREATE TABLE `ghe_ngoi` (
 
 LOCK TABLES `ghe_ngoi` WRITE;
 /*!40000 ALTER TABLE `ghe_ngoi` DISABLE KEYS */;
+INSERT INTO `ghe_ngoi` VALUES (1,'A',1,1,'NC'),(2,'A',2,1,'NC'),(3,'B',1,1,'NC'),(4,'B',2,1,'NC'),(5,'A',1,2,'SC'),(6,'A',2,2,'NC'),(7,'A',3,2,'NC'),(8,'A',4,2,'DC'),(9,'B',1,2,'SC'),(10,'B',2,2,'NC'),(11,'B',3,2,'NC'),(12,'B',4,2,'DC');
 /*!40000 ALTER TABLE `ghe_ngoi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,6 +179,7 @@ CREATE TABLE `hoa_don` (
 
 LOCK TABLES `hoa_don` WRITE;
 /*!40000 ALTER TABLE `hoa_don` DISABLE KEYS */;
+INSERT INTO `hoa_don` VALUES ('HD001','2018-04-04','US002'),('HD002','2018-04-04','US001');
 /*!40000 ALTER TABLE `hoa_don` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,6 +193,7 @@ DROP TABLE IF EXISTS `hoa_don_chi_tiet`;
 CREATE TABLE `hoa_don_chi_tiet` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `so_luong` int(10) unsigned NOT NULL,
+  `don_gia` int(10) unsigned NOT NULL,
   `do_an_chi_tiet_id` int(10) unsigned NOT NULL,
   `hoa_don_id` varchar(15) NOT NULL,
   PRIMARY KEY (`id`),
@@ -198,7 +201,7 @@ CREATE TABLE `hoa_don_chi_tiet` (
   KEY `FK_HOADONCHITIET_DOAN_idx` (`do_an_chi_tiet_id`),
   CONSTRAINT `FK_HOADONCHITIET_DOANCHITIET` FOREIGN KEY (`do_an_chi_tiet_id`) REFERENCES `do_an_chi_tiet` (`id`),
   CONSTRAINT `FK_HOADONCHITIET_HOADON` FOREIGN KEY (`hoa_don_id`) REFERENCES `hoa_don` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,6 +210,7 @@ CREATE TABLE `hoa_don_chi_tiet` (
 
 LOCK TABLES `hoa_don_chi_tiet` WRITE;
 /*!40000 ALTER TABLE `hoa_don_chi_tiet` DISABLE KEYS */;
+INSERT INTO `hoa_don_chi_tiet` VALUES (1,2,60000,2,'HD001'),(2,3,267000,4,'HD002');
 /*!40000 ALTER TABLE `hoa_don_chi_tiet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,6 +361,7 @@ CREATE TABLE `nguoi_dung` (
   `dia_chi` varchar(100) DEFAULT NULL,
   `ngay_vao_lam` date NOT NULL,
   `gioi_tinh` bit(1) NOT NULL,
+  `trang_thai` bit(1) DEFAULT b'0',
   `vai_tro_id` varchar(2) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `so_cmnd_UNIQUE` (`so_cmnd`),
@@ -371,7 +376,7 @@ CREATE TABLE `nguoi_dung` (
 
 LOCK TABLES `nguoi_dung` WRITE;
 /*!40000 ALTER TABLE `nguoi_dung` DISABLE KEYS */;
-INSERT INTO `nguoi_dung` VALUES ('US001','Lưu Tuấn Cường','12345','123','0367428198','cuonglt@gmail.com','BTH','2018-01-01',_binary '','AD'),('US002','Võ Thành Tài','12345','456','0123456789','taivt@gmail.com','HCM','2017-01-01',_binary '','EM'),('US003','Trần Light','12345','789','0123456789','tranlight@gmail.com','TN','2016-01-01',_binary '\0','MA');
+INSERT INTO `nguoi_dung` VALUES ('US001','Lưu Tuấn Cường','12345','123','0367428198','cuonglt@gmail.com','BTH','2018-01-01',_binary '',_binary '\0','AD'),('US002','Võ Thành Tài','12345','456','0123456789','taivt@gmail.com','HCM','2017-01-01',_binary '',_binary '\0','EM'),('US003','Trần Light','12345','789','0123456789','tranlight@gmail.com','TN','2016-01-01',_binary '\0',_binary '\0','MA');
 /*!40000 ALTER TABLE `nguoi_dung` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,7 +428,7 @@ CREATE TABLE `phong_chieu` (
   `so_luong_day` int(10) unsigned NOT NULL,
   `so_luong_cot` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -432,6 +437,7 @@ CREATE TABLE `phong_chieu` (
 
 LOCK TABLES `phong_chieu` WRITE;
 /*!40000 ALTER TABLE `phong_chieu` DISABLE KEYS */;
+INSERT INTO `phong_chieu` VALUES (1,10,18),(2,10,18);
 /*!40000 ALTER TABLE `phong_chieu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -457,7 +463,7 @@ CREATE TABLE `suat_chieu` (
   CONSTRAINT `FK_SUATCHIEU_DINHDANGPHIM` FOREIGN KEY (`dinh_dang_phim_id`) REFERENCES `dinh_dang_phim` (`id`),
   CONSTRAINT `FK_SUATCHIEU_PHIM` FOREIGN KEY (`phim_id`) REFERENCES `phim` (`id`),
   CONSTRAINT `FK_SUATCHIEU_PHONGCHIEU` FOREIGN KEY (`phong_chieu_id`) REFERENCES `phong_chieu` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -466,6 +472,7 @@ CREATE TABLE `suat_chieu` (
 
 LOCK TABLES `suat_chieu` WRITE;
 /*!40000 ALTER TABLE `suat_chieu` DISABLE KEYS */;
+INSERT INTO `suat_chieu` VALUES (1,'20:00:00','22:00:00','2018-11-11',1,1,'3D'),(2,'09:00:00','11:00:00','2018-12-12',2,2,'IMAX');
 /*!40000 ALTER TABLE `suat_chieu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -489,7 +496,7 @@ CREATE TABLE `vai_tro` (
 
 LOCK TABLES `vai_tro` WRITE;
 /*!40000 ALTER TABLE `vai_tro` DISABLE KEYS */;
-INSERT INTO `vai_tro` VALUES ('AD','Quản lý rạp'),('EM','Nhân viên'),('MA','Ban quản lý');
+INSERT INTO `vai_tro` VALUES ('AD','Admin'),('EM','Nhân viên bán hàng'),('MA','Nhân viên quản lý');
 /*!40000 ALTER TABLE `vai_tro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -526,6 +533,7 @@ CREATE TABLE `ve_ban` (
 
 LOCK TABLES `ve_ban` WRITE;
 /*!40000 ALTER TABLE `ve_ban` DISABLE KEYS */;
+INSERT INTO `ve_ban` VALUES ('VB001','2018-11-11',1,1,2,10,'US002'),('VB002','2018-12-12',1,2,3,2,'US003');
 /*!40000 ALTER TABLE `ve_ban` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -566,4 +574,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-03 14:57:01
+-- Dump completed on 2018-11-04 13:15:47
