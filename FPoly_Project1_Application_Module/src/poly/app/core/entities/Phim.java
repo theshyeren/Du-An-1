@@ -30,12 +30,14 @@ public class Phim  implements java.io.Serializable {
     }
 
 	
-    public Phim(LoaiPhim loaiPhim, String ten, int thoiLuong) {
+    public Phim(String id, LoaiPhim loaiPhim, String ten, int thoiLuong) {
+        this.id = id;
         this.loaiPhim = loaiPhim;
         this.ten = ten;
         this.thoiLuong = thoiLuong;
     }
-    public Phim(LoaiPhim loaiPhim, String ten, int thoiLuong, Integer gioiHanTuoi, Date ngayCongChieu, String ngonNgu, String dienVien, String quocGia, String nhaSanXuat, String tomTat, String trangThai, Set<SuatChieu> suatChieus) {
+    public Phim(String id, LoaiPhim loaiPhim, String ten, int thoiLuong, Integer gioiHanTuoi, Date ngayCongChieu, String ngonNgu, String dienVien, String quocGia, String nhaSanXuat, String tomTat, String trangThai, Set<SuatChieu> suatChieus) {
+       this.id = id;
        this.loaiPhim = loaiPhim;
        this.ten = ten;
        this.thoiLuong = thoiLuong;
