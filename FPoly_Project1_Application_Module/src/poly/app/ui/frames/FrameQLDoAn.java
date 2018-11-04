@@ -159,10 +159,6 @@ public class FrameQLDoAn extends javax.swing.JFrame {
             new String [] {
                 "Mã đồ ăn", "Tên đồ ăn", "Loại đồ ăn"
             }
-        ));
-        tblDoAn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDoAnMouseClicked(evt);
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
@@ -177,6 +173,11 @@ public class FrameQLDoAn extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblDoAn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDoAnMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblDoAn);
