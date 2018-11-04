@@ -302,9 +302,9 @@ public class FrameQLDoAn extends javax.swing.JFrame {
     }
 
     public void loadDoAnChiTiet() {
-//        int index = tblDoAn.getSelectedRow();
-//        DoAn doan = listDoAn.get(index);
-//        String id = doan.getId();
+        int index = tblDoAn.getSelectedRow();
+        DoAn doan = listDoAn.get(index);
+        String id = doan.getId();
         
         DefaultTableModel modelDACT = (DefaultTableModel) tblDoAnChiTiet.getModel();
         modelDACT.setRowCount(0);
