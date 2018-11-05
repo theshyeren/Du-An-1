@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import poly.app.core.daoimpl.KhachHangDaoImpl;
 import poly.app.core.entities.KhachHang;
+import poly.app.ui.dialogs.DialogThemKhachHang;
 import poly.app.ui.utils.TableRendererUtil;
 
 /**
@@ -89,6 +90,11 @@ public class FrameQLKhachHang extends javax.swing.JFrame {
 
         btnThem.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         btnSua.setText("Sửa");
@@ -250,6 +256,12 @@ public class FrameQLKhachHang extends javax.swing.JFrame {
     private void tblKhachHangMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_tblKhachHangMouseReleased
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        new DialogThemKhachHang(null, true).setVisible(true);
+        loadDataToTable();
+    }//GEN-LAST:event_btnThemActionPerformed
 
     
     

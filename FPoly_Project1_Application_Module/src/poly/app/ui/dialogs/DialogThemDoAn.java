@@ -57,7 +57,7 @@ public class DialogThemDoAn extends javax.swing.JDialog {
         }
         else
         {
-            model.setId("NU"+ new Date().getTime());
+            model.setId("NU"+new Date().getTime());
         }
         return model;
     }

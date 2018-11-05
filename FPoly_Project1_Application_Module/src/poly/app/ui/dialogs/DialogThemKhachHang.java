@@ -5,7 +5,13 @@
  */
 package poly.app.ui.dialogs;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import poly.app.core.daoimpl.KhachHangDaoImpl;
 import poly.app.core.entities.KhachHang;
+import poly.app.core.utils.StringUtil;
 
 /**
  *
@@ -16,26 +22,44 @@ public class DialogThemKhachHang extends javax.swing.JDialog {
     /**
      * Creates new form DialogThemNhanVien
      */
+
+    
+    
     public DialogThemKhachHang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
     }
+   
+    
 
     private KhachHang getModelFromInput(){
+        KhachHang khachHang = new KhachHang();
+        khachHang.setHoTen(this.txtHoTen.getText());
+        khachHang.setMatKhau(StringUtil.randomString());
+        khachHang.setDiaChi(this.txtDiaChi.getText());
+        khachHang.setSoCmnd(this.txtCMND.getText());
+        khachHang.setNgayDangKy(this.dcNgayVaoLam.getDate());
+        khachHang.setSoDienThoai(this.txtSoDienThoai.getText());
+        khachHang.setGioiTinh(this.rdoNam.isSelected());
+        khachHang.setEmail(this.txtEmail.getText());
+        khachHang.setNgaySinh(this.dcNgaySinh.getDate());
+        khachHang.setId("KH" + new Date().getTime());
 //        code lay khach hang tu input
 //        nho set mat khau cho khach hang
 //        Get mat khau bang StringUtil.randomString()
 //        Khach Hang dung se co dang: KH01293411
 //        cach lam ma Khach Hang: "KH" + new Date().getTime();
 
-        return null;
+        return khachHang;
     }
     
     private boolean insertModelToDatabase(){
 //        goi ham getNguoiDungFromInput
+    KhachHang khachHang = getModelFromInput();
         try {
-
+            new KhachHangDaoImpl().insert(khachHang);
+            return true;
         } catch (Exception e) {
         }
         return false;
@@ -206,8 +230,10 @@ public class DialogThemKhachHang extends javax.swing.JDialog {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         if (insertModelToDatabase()){
+            JOptionPane.showMessageDialog(this, "them thanh cong");
             
         }else{
+            JOptionPane.showMessageDialog(this, "them that bai");
             
         }
     }//GEN-LAST:event_btnLuuActionPerformed
