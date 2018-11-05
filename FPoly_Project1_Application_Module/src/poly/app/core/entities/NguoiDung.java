@@ -121,13 +121,22 @@ public class NguoiDung  implements java.io.Serializable {
     public void setNgayVaoLam(Date ngayVaoLam) {
         this.ngayVaoLam = ngayVaoLam;
     }
-    public boolean isGioiTinh() {
+    public boolean getGioiTinh() {
+        return this.gioiTinh;
+    }
+    
+    public boolean isGioiTinhNam(){
         return this.gioiTinh;
     }
     
     public void setGioiTinh(boolean gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
+    
+    public void setGioiTinhNam(){
+        this.gioiTinh = true;
+    }
+    
     public Boolean isDangLam() {
         return this.dangLam;
     }
