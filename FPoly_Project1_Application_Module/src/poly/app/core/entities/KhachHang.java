@@ -113,12 +113,19 @@ public class KhachHang  implements java.io.Serializable {
     public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
-    public boolean isGioiTinh() {
+    public boolean getGioiTinh() {
+        return this.gioiTinh;
+    }
+    public boolean isGioiTinhNam(){
         return this.gioiTinh;
     }
     
     public void setGioiTinh(boolean gioiTinh) {
         this.gioiTinh = gioiTinh;
+    }
+    
+    public void setGioiTinhNam(){
+        this.gioiTinh = true;
     }
     public Set<VeDat> getVeDats() {
         return this.veDats;

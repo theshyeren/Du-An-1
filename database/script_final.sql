@@ -53,7 +53,7 @@ CREATE TABLE `do_an` (
   `id` varchar(15) NOT NULL,
   `ten` varchar(45) NOT NULL,
   `dang_ban` bit(1) DEFAULT b'1',
-  `loai_do_an_id` int(10) unsigned NOT NULL,
+  `loai_do_an_id` varchar(5) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_DOAN_LOAIDOAN_idx` (`loai_do_an_id`),
   CONSTRAINT `FK_DOAN_LOAIDOAN` FOREIGN KEY (`loai_do_an_id`) REFERENCES `loai_do_an` (`id`)
@@ -66,7 +66,7 @@ CREATE TABLE `do_an` (
 
 LOCK TABLES `do_an` WRITE;
 /*!40000 ALTER TABLE `do_an` DISABLE KEYS */;
-INSERT INTO `do_an` VALUES ('DA001','Bắp rang bơ',_binary '',1),('DA002','Đùi gà',_binary '',1),('DA1541342381451','haha',_binary '',1),('NU003','Coca',_binary '',2),('NU004','Pepsi',_binary '',2);
+INSERT INTO `do_an` VALUES ('DA001','Bắp rang bơ',_binary '','DA'),('DA002','Đùi gà',_binary '','DA'),('DA1541342381451','haha',_binary '','DA'),('NU003','Coca',_binary '','NU'),('NU004','Pepsi',_binary '','NU');
 /*!40000 ALTER TABLE `do_an` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,10 +281,10 @@ DROP TABLE IF EXISTS `loai_do_an`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `loai_do_an` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` varchar(5) NOT NULL,
   `ten` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -293,7 +293,7 @@ CREATE TABLE `loai_do_an` (
 
 LOCK TABLES `loai_do_an` WRITE;
 /*!40000 ALTER TABLE `loai_do_an` DISABLE KEYS */;
-INSERT INTO `loai_do_an` VALUES (1,'Đồ ăn nhanh'),(2,'Đồ uống');
+INSERT INTO `loai_do_an` VALUES ('DA','Đồ ăn nhanh'),('NU','Đồ uống');
 /*!40000 ALTER TABLE `loai_do_an` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,10 +330,10 @@ DROP TABLE IF EXISTS `loai_phim`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `loai_phim` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `ten` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -342,7 +342,7 @@ CREATE TABLE `loai_phim` (
 
 LOCK TABLES `loai_phim` WRITE;
 /*!40000 ALTER TABLE `loai_phim` DISABLE KEYS */;
-INSERT INTO `loai_phim` VALUES (1,'Phim heo'),(2,'Phim người');
+INSERT INTO `loai_phim` VALUES (1,'Phim hành động'),(2,'Phim hài hước');
 /*!40000 ALTER TABLE `loai_phim` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -575,4 +575,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-05 14:06:13
+-- Dump completed on 2018-11-05 15:21:30
