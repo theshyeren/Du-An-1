@@ -5,6 +5,11 @@
  */
 package poly.app.ui.frames;
 
+
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import poly.app.core.daoimpl.KhachHangDaoImpl;
+import poly.app.core.entities.KhachHang;
 import poly.app.ui.utils.TableRendererUtil;
 
 /**
@@ -240,6 +245,27 @@ public class FrameQLKhachHang extends javax.swing.JFrame {
     
     
     public void loadDataToTable(){
+    KhachHangDaoImpl khachHangDaoImpl = new KhachHangDaoImpl();
+        DefaultTableModel modelTblKH = (DefaultTableModel) tblKhachHang.getModel();
+        modelTblKH.setRowCount(0);
+        List<KhachHang> listKH = khachHangDaoImpl.getAll();
+        for (KhachHang kh: listKH){
+            Object[] record =  new Object[]{
+            kh.getId(),
+            kh.getHoTen(),
+            kh.getSoCmnd(),
+            kh.getSoDienThoai(),
+            kh.getEmail(),
+            kh.getDiaChi(),
+            kh.getNgayDangKy(),
+            kh.getNgaySinh(),
+            kh.getGioiTinh()?"Nam":"Nu"
+            };
+            modelTblKH.addRow(record);
+//            modelTblKH.addRow(new Object[]{kh.getId(),kh.getHoTen(),kh.getSoCmnd(),kh.getSoDienThoai()
+//                ,kh.getEmail(),kh.getDiaChi(),kh.getNgayDangKy(),kh.getNgaySinh()});
+        }
+//        this.tblKhachHang.setModel(modelTblKH);
 //        Đổ dữ liệu từ database vào table
 //        Code không quá 10 dòng
     }
