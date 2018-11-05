@@ -5,8 +5,12 @@
  */
 package poly.app.ui.dialogs;
 
+import java.util.Date;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import poly.app.core.daoimpl.KhachHangDaoImpl;
 import poly.app.core.entities.KhachHang;
+import poly.app.core.utils.StringUtil;
 
 /**
  *
@@ -15,6 +19,8 @@ import poly.app.core.entities.KhachHang;
 public class DialogCapNhatKhachHang extends javax.swing.JDialog {
 
     KhachHang khachHang;
+    ButtonGroup btngr = new ButtonGroup();
+    String khID;
     /**
      * Creates new form DialogThemNhanVien
      */
@@ -22,29 +28,53 @@ public class DialogCapNhatKhachHang extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        btngr.add(rdoNam);
+        btngr.add(rdoNu);
     }
     
     public DialogCapNhatKhachHang(java.awt.Frame parent, boolean modal, String khachHangId) {
         this(parent, modal);
-        
+        this.khID = khachHangId;
         khachHang = new KhachHangDaoImpl().getById(khachHangId);
     }
     
     private void setModelToInput(){
+        
 //        Do du lieu len input
+        txtHoTen.setText(khachHang.getHoTen());
+        txtDiaChi.setText(khachHang.getDiaChi());
+        txtCMND.setText(khachHang.getSoCmnd());
+        dcNgayVaoLam.setDate(khachHang.getNgayDangKy());
+        txtSoDienThoai.setText(khachHang.getSoDienThoai());
+        txtEmail.setText(khachHang.getEmail());
+        dcNgaySinh.setDate(khachHang.getNgaySinh());
+        rdoNu.setSelected(!khachHang.isName());
     }
     
-    private KhachHang getModelFromInput(){
+        private KhachHang getModelFromInput(){
+        KhachHang modelUpdate = new KhachHang();
+        modelUpdate.setHoTen(this.txtHoTen.getText());
+        modelUpdate.setMatKhau(StringUtil.randomString());
+        modelUpdate.setDiaChi(this.txtDiaChi.getText());
+        modelUpdate.setSoCmnd(this.txtCMND.getText());
+        modelUpdate.setNgayDangKy(this.dcNgayVaoLam.getDate());
+        modelUpdate.setSoDienThoai(this.txtSoDienThoai.getText());
+        modelUpdate.setGioiTinh(this.rdoNam.isSelected());
+        modelUpdate.setEmail(this.txtEmail.getText());
+        modelUpdate.setNgaySinh(this.dcNgaySinh.getDate());
+        modelUpdate.setId(khID);
 //        code lay phim tu input
 //        set lai gia tri moi cho khach hang
 
-        return null;
+        return modelUpdate;
     }
     
     private boolean updateModelToDatabase(){
 //        goi ham getModelFromInput
         try {
-
+           KhachHangDaoImpl khdao = new KhachHangDaoImpl();
+           khdao.update(getModelFromInput());
+           return true;
         } catch (Exception e) {
         }
         return false;
@@ -101,6 +131,7 @@ public class DialogCapNhatKhachHang extends javax.swing.JDialog {
 
         jLabel9.setText("Giới tính");
 
+        rdoNam.setSelected(true);
         rdoNam.setText("Nam");
 
         rdoNu.setText("Nữ");
@@ -210,14 +241,14 @@ public class DialogCapNhatKhachHang extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-
+        this.setModelToInput();
     }//GEN-LAST:event_formWindowOpened
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         if (updateModelToDatabase()){
-            
+            JOptionPane.showMessageDialog(this, "cap nhat thanh cong");
         }else{
-            
+            JOptionPane.showMessageDialog(this, "cap nhat that bai");
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 

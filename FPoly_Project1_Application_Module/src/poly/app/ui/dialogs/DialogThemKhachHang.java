@@ -8,6 +8,7 @@ package poly.app.ui.dialogs;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import poly.app.core.daoimpl.KhachHangDaoImpl;
 import poly.app.core.entities.KhachHang;
@@ -23,12 +24,14 @@ public class DialogThemKhachHang extends javax.swing.JDialog {
      * Creates new form DialogThemNhanVien
      */
 
-    
+    ButtonGroup btngr = new ButtonGroup();
     
     public DialogThemKhachHang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        btngr.add(rdoNam);
+        btngr.add(rdoNu);
     }
    
     

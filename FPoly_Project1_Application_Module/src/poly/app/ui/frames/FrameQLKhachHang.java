@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import poly.app.core.daoimpl.KhachHangDaoImpl;
 import poly.app.core.entities.KhachHang;
+import poly.app.ui.dialogs.DialogCapNhatKhachHang;
 import poly.app.ui.dialogs.DialogThemKhachHang;
 import poly.app.ui.utils.TableRendererUtil;
 
@@ -98,6 +99,11 @@ public class FrameQLKhachHang extends javax.swing.JFrame {
 
         btnSua.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Xoá");
 
@@ -263,6 +269,10 @@ public class FrameQLKhachHang extends javax.swing.JFrame {
         loadDataToTable();
     }//GEN-LAST:event_btnThemActionPerformed
 
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        this.updateKhachHang();
+    }//GEN-LAST:event_btnSuaActionPerformed
+
     
     
     public void loadDataToTable(){
@@ -290,7 +300,11 @@ public class FrameQLKhachHang extends javax.swing.JFrame {
 //        Đổ dữ liệu từ database vào table
 //        Code không quá 10 dòng
     }
-    
+    public void updateKhachHang()
+    {
+        String idKH = (String) tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0);
+        new DialogCapNhatKhachHang(this, true,idKH).setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */
