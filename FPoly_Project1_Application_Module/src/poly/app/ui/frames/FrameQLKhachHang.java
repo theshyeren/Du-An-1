@@ -268,7 +268,7 @@ public class FrameQLKhachHang extends javax.swing.JFrame {
             kh.getDiaChi(),
             kh.getNgayDangKy(),
             kh.getNgaySinh(),
-            kh.getGioiTinh()?"Nam":"Nu"
+            kh.getGioiTinh()?"Nam":"Nữ"
             };
             modelTblKH.addRow(record);
 //            modelTblKH.addRow(new Object[]{kh.getId(),kh.getHoTen(),kh.getSoCmnd(),kh.getSoDienThoai()
